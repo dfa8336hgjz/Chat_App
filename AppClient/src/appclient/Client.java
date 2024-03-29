@@ -21,7 +21,6 @@ public class Client extends Thread {
         mainClient = new Socket("localhost", 12345);
         input = new DataInputStream(mainClient.getInputStream());
         output = new DataOutputStream(mainClient.getOutputStream());
-        System.out.println("Connected to main server");
     }
 
     @Override
@@ -33,7 +32,6 @@ public class Client extends Thread {
             output.close();
 
             chatClient = new Socket("localhost", port);
-            System.out.println("Connected to chat");
 
             chatInput = new DataInputStream(chatClient.getInputStream());
             chatOutput = new DataOutputStream(chatClient.getOutputStream());
@@ -48,7 +46,6 @@ public class Client extends Thread {
                 chatOutput.close();
                 chatClient.close();
             } catch (IOException e1) {
-                System.out.println("Cannot delete client");
             }
         }
     }
@@ -72,6 +69,10 @@ public class Client extends Thread {
         notify();
     }
 
+    public int getPort() {
+        return port;
+    }
+
     public void setPort(int port) {
         this.port = port;
     }
@@ -85,9 +86,9 @@ public class Client extends Thread {
     }
 
     public void sendMessageToServer(String msg) throws IOException {
+        ClientUI.instance.addMessage("You: " + msg + "\n");
         String str = username + ": " + msg + "\n";
         chatOutput.writeUTF(str);
-        ClientUI.instance.addMessage(str);
     }
 
 }

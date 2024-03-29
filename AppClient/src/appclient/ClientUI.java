@@ -101,7 +101,6 @@ public class ClientUI extends javax.swing.JFrame {
                 thisClient.sendMessageToServer(str);
                 message.setText("");
             } catch (IOException e) {
-                System.out.println("Send Message Failed!");
             }
         }
     }
@@ -135,6 +134,11 @@ public class ClientUI extends javax.swing.JFrame {
 
     public void addMessage(String msg) {
         jTextArea1.append(msg);
+    }
+
+    public void updateClientInfo() {
+        jLabel2.setText("Username: " + thisClient.getUsername());
+        jLabel3.setText("Chat ID: " + thisClient.getPort());
     }
 
     private javax.swing.JLabel jLabel1;

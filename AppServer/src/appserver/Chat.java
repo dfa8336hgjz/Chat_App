@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package appserver;
 
 import java.util.List;
@@ -24,7 +20,6 @@ class Chat extends Thread {
         this.port = port;
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Chat server started. Waiting for clients...");
         } catch (IOException e) {
             System.out.println("Cannot open server");
         }
@@ -44,6 +39,7 @@ class Chat extends Thread {
                 client.start();
 
             } catch (Exception e) {
+
             }
 
         }
@@ -106,7 +102,6 @@ class ClientHandler extends Thread {
             } catch (Exception e) {
 
                 if (chat != null) {
-                    System.out.println("A chat disconnected from chat " + chat.getPort());
                     chat.decreaseCount();
                     chat.checkDestroy();
                 }

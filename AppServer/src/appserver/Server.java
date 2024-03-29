@@ -20,13 +20,11 @@ public class Server extends Thread {
     public void run() {
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Main server started. Waiting for clients...");
             while (true) {
                 try {
                     Socket socket = serverSocket.accept();
                     DataInputStream input = new DataInputStream(socket.getInputStream());
                     DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-                    System.out.println("Client " + socket.getInetAddress().getHostAddress() + " is connected");
                     CreateServerRequest request = new CreateServerRequest(socket, output, input);
                     request.start();
                 } catch (Exception e) {
